@@ -1,13 +1,13 @@
-@TodoCtrl = ($scope) ->
-	$scope.todos = [
-		{name: "Take out the Trash"}
-		{name: "Clean up the Basement"}
-		{name: "Do the Dishes"}
-	]
+app = angular.module("Todo", ["ngResource"])
+
+app.factory "Todo", ($resource) ->
+	$resource("/todos/:id", {id: "@id"})
+
+@TodoCtrl = ($scope, Todo) ->
+	$scope.todos = Todo.query()
 
 	$scope.addTodo = ->
-		$scope.todos.push($scope.newTodo)
+		todo = Todo.save($scope.newTodo)
+		$scope.todos.push(todo)
 		$scope.newTodo = {}
 
-	$scope.deleteTodo = ->
-		$scope.todos.splice($scope.todos.indexOf($scope.todo), 1)	
