@@ -1,0 +1,18 @@
+<h1>Todo</h1>
+<p>Find me in app/views/todo/index.html.erb</p>
+
+<div ng-controller="TodoCtrl">
+	<form ng-submit="addTodo()">
+		<input type="text" ng-model="newTodo.name">
+		<input type="submit" value="Add">
+		<p>
+			How your listing will appear: <strong>{{newTodo.name}}</strong>
+		</p>	
+	</form>
+
+	<ul>
+		<li ng-repeat="todo in todos">
+			{{todo.name}}<button ng:click="deleteTodo()">x</button>
+		</li>
+	</ul>
+</div>
